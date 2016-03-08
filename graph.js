@@ -4,10 +4,16 @@ var d3 = require('d3-selection');
 function Graph(createOpts) {
   var width;
   var height;
+  var random;
 
   if (createOpts) {
     width = createOpts.width;
     height = createOpts.height;
+    random = createOpts.random;
+  }
+
+  if (!random) {
+    random = Math.random;
   }
 
   var force;
@@ -16,7 +22,7 @@ function Graph(createOpts) {
   var nodesSel;
 
   function render() {
-    force = d3force()
+    force = d3force(random)
         .size([width, height])
         .charge(-400)
         .linkDistance(40)
