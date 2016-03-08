@@ -1,5 +1,5 @@
 var Graph = require('../graph');
-var randomgraph = require('randomgraph');
+var randomgraph = require('randomgraph')();
 
 var graphData = randomgraph.WattsStrogatz.beta(40, 4, 0.2);
 
