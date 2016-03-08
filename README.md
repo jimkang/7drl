@@ -12,6 +12,7 @@ Installation
 Usage
 -----
 
+    npm install -g browserify
     make run    
 
 Or run [wzrd](https://github.com/maxogden/wzrd) directly:

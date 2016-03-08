@@ -1,3 +1,5 @@
+UGLIFY = node_modules/.bin/uglifyjs
+
 test:
 	node tests/basictests.js
 
@@ -6,7 +8,7 @@ run:
 		-d
 
 build:
-	$(BROWSERIFY) app.js | $(UGLIFY) -c -m -o index.js
+	browserify app.js | $(UGLIFY) -c -m -o index.js
 
 pushall:
 	git push origin gh-pages

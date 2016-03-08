@@ -19,7 +19,8 @@
   "homepage": "https://github.com/jimkang/7drl",
   "devDependencies": {
     "smash": "0.0.15",
-    "tape": "^3.0.3"
+    "tape": "^3.0.3",
+    "uglify-js": "^2.6.2"
   },
   "dependencies": {
     "browserify": "^8.1.3",
