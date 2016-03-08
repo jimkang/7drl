@@ -10,7 +10,7 @@ body {
 }
 
 .node {
-  cursor: move;
+  cursor: pointer;
   fill: #ccc;
   stroke: #000;
   stroke-width: 1.5px;
@@ -18,4 +18,12 @@ body {
 
 .node.fixed {
   fill: #f00;
+}
+
+.node.player-graph-node {
+  fill: hsl(110, 85%, 45%);
+}
+
+.invisible {
+  opacity: 0;
 }

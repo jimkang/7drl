@@ -1,5 +1,12 @@
 var d3force = require('./lib/d3-force').layout.force;
 var d3 = require('d3-selection');
+var Crown = require('csscrown');
+var accessor = require('accessor');
+
+var crownPlayerNode = Crown({
+  crownClass: 'player-graph-node'
+});
+var getId = accessor();
 
 function Graph(createOpts) {
   var width;
@@ -32,6 +39,9 @@ function Graph(createOpts) {
       .attr("width", width)
       .attr("height", height);
 
+    // svg.classed('invisible', true);    
+    // setTimeout(revealSVG, 2000);
+
     linksSel = svg.selectAll(".link");
     nodesSel = svg.selectAll(".node");
   }
@@ -48,9 +58,10 @@ function Graph(createOpts) {
 
     nodesSel = nodesSel.data(nodes)
       .enter().append("circle")
+        .attr('id', getId)
         .attr("class", "node")
         .attr("r", 12)
-        .on("dblclick", dblclick);    
+        .on("click", click);
   }
 
   function tick() {
@@ -63,8 +74,12 @@ function Graph(createOpts) {
         .attr("cy", function(d) { return d.y; });
   }
 
-  function dblclick(d) {
-    // d3.select(this).classed("fixed", d.fixed = false);
+  function click() {
+    crownPlayerNode(this);
+  }
+
+  function revealSVG() {
+    svg.classed('invisible', false);
   }
 
   return {
