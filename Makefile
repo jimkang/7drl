@@ -1,7 +1,8 @@
 UGLIFY = node_modules/.bin/uglifyjs
 
 test:
-	node tests/basictests.js
+	node tests/neighbor-tests.js
+	node tests/space-tests.js
 
 run:
 	wzrd app.js:index.js -- \

@@ -32,6 +32,7 @@
     "lodash": "^3.6.0",
     "lodash.findwhere": "^3.1.0",
     "one-at": "^0.1.1",
+    "probable": "^2.0.0",
     "randomgraph": "jimkang/randomgraph.js",
     "uglify-js": "^2.4.17"
   }
