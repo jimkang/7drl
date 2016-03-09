@@ -1,43 +1,17 @@
-var Graph = require('../graph');
+var renderGraphPane = require('../render-graph-pane');
+var generateRandomGraph = require('../generate-random-graph');
 var seedrandom = require('../lib/seedrandom.min.js');
-var randomId = require('idmaker').randomId;
-var GetNeighbors = require('../get-neighbors');
-var findWhere = require('lodash.findwhere');
 
 var random = seedrandom('test');
 
-var randomgraph = require('randomgraph')({
+var graphData = generateRandomGraph({
   random: random
-});
-
-var graphData = randomgraph.WattsStrogatz.beta(30, 4, 0.2);
-graphData.nodes.forEach(setNodeId);
+})
 
 // console.log(JSON.stringify(graphData, null, '  '));
 
-var getNeighbors = GetNeighbors({
-  nodes: graphData.nodes,
-  links: graphData.edges
-});
-
-var graph = Graph({
-  width: 960,
-  height: 550,
+renderGraphPane({
   random: random,
-  canSelectNodeFromNode: canSelectNodeFromNode
+  nodes: graphData.nodes,
+  links: graphData.links
 });
-
-graph.render();
-graph.renderUpdate(graphData.nodes, graphData.edges);
-
-function setNodeId(node) {
-  node.id = randomId(4);
-}
-
-function canSelectNodeFromNode(node, currentlySelectedNode) {
-  if (!currentlySelectedNode) {
-    return true;
-  }
-  var neighbors = getNeighbors(currentlySelectedNode.id);
-  return neighbors && findWhere(neighbors, {id: node.id});
-}
