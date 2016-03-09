@@ -1,12 +1,15 @@
-var Graph = require('./graph');
-var randomgraph = require('randomgraph');
+var renderGraphPane = require('./render-graph-pane');
+var generateRandomGraph = require('./generate-random-graph');
+var seedrandom = require('./lib/seedrandom.min.js');
 
-var graphData = randomgraph.WattsStrogatz.beta(40, 4, 0.2);
+var random = seedrandom('app');
 
-var graph = Graph({
-  width: 960,
-  height: 500
+var graphData = generateRandomGraph({
+  random: random
 });
 
-graph.render();
-graph.renderUpdate(graphData.nodes, graphData.edges);
+renderGraphPane({
+  random: random,
+  nodes: graphData.nodes,
+  links: graphData.links
+});

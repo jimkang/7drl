@@ -6,7 +6,7 @@ var random = seedrandom('test');
 
 var graphData = generateRandomGraph({
   random: random
-})
+});
 
 // console.log(JSON.stringify(graphData, null, '  '));
 
