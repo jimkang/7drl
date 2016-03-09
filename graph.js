@@ -12,11 +12,13 @@ function Graph(createOpts) {
   var width;
   var height;
   var random;
+  var canSelectNodeFromNode;
 
   if (createOpts) {
     width = createOpts.width;
     height = createOpts.height;
     random = createOpts.random;
+    canSelectNodeFromNode = createOpts.canSelectNodeFromNode;
   }
 
   if (!random) {
@@ -31,7 +33,7 @@ function Graph(createOpts) {
   function render() {
     force = d3force(random)
         .size([width, height])
-        .charge(-400)
+        .charge(-800)
         .linkDistance(40)
         .on("tick", tick);
 
@@ -74,8 +76,16 @@ function Graph(createOpts) {
         .attr("cy", function(d) { return d.y; });
   }
 
-  function click() {
-    crownPlayerNode(this);
+  function click(d) {
+    var selectedNode;
+    var selectedNodeSel = d3.select('.player-graph-node');
+    if (!selectedNodeSel.empty()) {
+      selectedNode = d3.select('.player-graph-node').datum();
+    }
+
+    if (canSelectNodeFromNode(d, selectedNode)) {
+      crownPlayerNode(this);
+    }
   }
 
   function revealSVG() {
