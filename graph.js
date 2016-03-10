@@ -85,7 +85,19 @@ function Graph(createOpts) {
 
     if (canSelectNodeFromNode(d, selectedNode)) {
       crownPlayerNode(this);
+      emitSelectEvent(d);
     }
+  }
+
+  // TODO: test.
+  function emitSelectEvent(selectedNode) {
+    var selectEvent = new CustomEvent(
+      'node-selected',
+      {
+        detail: selectedNode
+      }
+    );
+    document.dispatchEvent(selectEvent);
   }
 
   function revealSVG() {
