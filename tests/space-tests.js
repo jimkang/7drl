@@ -21,6 +21,12 @@ function runTest(node, i) {
       nodes: graphData.nodes,
       links: graphData.links
     });
+    t.ok(space.type, 'Space has a type.');
+    t.ok(space.description, 'Space has a description.');
+    t.ok(space.encounterKey, 'Space has an encounterKey');
+    t.equal(typeof space.hasExit, 'boolean', 'Space has hasExit.');
+    t.equal(typeof space.hasEntrance, 'boolean', 'Space has hasEntrance.');
+
     console.log(JSON.stringify(space, null, '  '));
     t.end();
   }
