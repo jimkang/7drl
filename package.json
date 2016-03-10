@@ -32,9 +32,10 @@
     "lodash": "^3.6.0",
     "lodash.findwhere": "^3.1.0",
     "one-at": "^0.1.1",
-    "probable": "^2.0.0",
+    "probable": "^2.0.1",
     "randomgraph": "jimkang/randomgraph.js",
     "strokerouter": "^2.0.0",
+    "tablenest": "^1.0.0",
     "uglify-js": "^2.4.17"
   }
 }

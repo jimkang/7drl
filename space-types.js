@@ -1,6 +1,5 @@
 module.exports = {
-  '0-19': 'woods',
-  '20-24': 'moors',
+  '0-24': 'woods',
   '25-34': 'bogs',
   '35-49': 'hills',
   '50-54': 'plains',

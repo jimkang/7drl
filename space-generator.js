@@ -2,6 +2,19 @@ var GetNeighbors = require('./get-neighbors');
 var createProbable = require('probable').createProbable;
 var spaceTypes = require('./space-types');
 var randomId = require('idmaker').randomId;
+var Tablenest = require('tablenest');
+
+var descriptionGrammarsForTypes = {
+  'bogs': require('./descriptions/bogs-grammar'),
+  'woods': require('./descriptions/woods-grammar'),
+  'hills': require('./descriptions/hills-grammar'),
+  'plains': require('./descriptions/plains-grammar'),
+  'mountain': require('./descriptions/mountain-grammar'),
+  'village': require('./descriptions/village-grammar'),
+  'city': require('./descriptions/city-grammar'),
+  'crags': require('./descriptions/crags-grammar'),
+  'beach': require('./descriptions/beach-grammar')
+};
 
 // Returns a function that generates spaces (using shared state across calls).
 function SpaceGenerator(createOpts) {
@@ -12,6 +25,10 @@ function SpaceGenerator(createOpts) {
   }
 
   var probable = createProbable({
+    random: random
+  });
+
+  var tablenest = Tablenest({
     random: random
   });
 
@@ -39,7 +56,6 @@ function SpaceGenerator(createOpts) {
     var generateOpts = {
       node: node,
       neighborNodes: getNeighbors(node.id),
-      typesTable: typesTable,
       makeEntrance: numberOfEntrances === 0 && probable.roll(15) === 0
     };
 
@@ -60,33 +76,46 @@ function SpaceGenerator(createOpts) {
   }
 
   return generateSpaceForNode;
-}
 
-function generateSpace(opts) {
-  var node;
-  var neighborNodes;
-  var makeExit;
-  var makeEntrance;
-  var typesTable;
 
-  if (opts) {
-    node = opts.node;
-    neighborNodes = opts.neighborNodes;
-    makeExit = opts.makeExit;
-    makeEntrance = opts.makeEntrance;
-    typesTable = opts.typesTable;
+  function generateSpace(opts) {
+    var node;
+    var neighborNodes;
+    var makeExit;
+    var makeEntrance;
+
+    if (opts) {
+      node = opts.node;
+      neighborNodes = opts.neighborNodes;
+      makeExit = opts.makeExit;
+      makeEntrance = opts.makeEntrance;
+    }
+
+    var spaceType = typesTable.roll();
+
+    var space = {
+      id: 'space-' + randomId(4),
+      type: spaceType,
+      description: getDescriptionForSpace(spaceType),
+      encounterKey: 'main-deck',
+      hasExit: makeExit || false,
+      hasEntrance: makeEntrance || false
+    };
+
+    return space;
   }
 
-  var space = {
-    id: 'space-' + randomId(4),
-    type: typesTable.roll(),
-    description: 'Hey, this is a space.',
-    encounterKey: 'main-deck',
-    hasExit: makeExit || false,
-    hasEntrance: makeEntrance || false
-  };
-
-  return space;
+  function getDescriptionForSpace(type) {
+    var grammar = descriptionGrammarsForTypes[type];
+    if (!grammar) {
+      grammar = {
+        root: {
+          '0': 'A space.'
+        }
+      };
+    }
+    return tablenest(grammar).roll();
+  }
 }
 
 module.exports = SpaceGenerator;
