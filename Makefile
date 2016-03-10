@@ -28,3 +28,6 @@ d3-force: $(D3_FORCE_FILES)
 
 graph-workspace:
 	wzrd workspaces/graph-workspace.js:index.js -- -d
+
+space-pane-workspace:
+	wzrd workspaces/space-pane-workspace.js:index.js -- -d

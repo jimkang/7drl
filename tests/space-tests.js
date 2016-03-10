@@ -21,6 +21,7 @@ function runTest(node, i) {
       nodes: graphData.nodes,
       links: graphData.links
     });
+    t.ok(space.id, 'Space has an id.');
     t.ok(space.type, 'Space has a type.');
     t.ok(space.description, 'Space has a description.');
     t.ok(space.encounterKey, 'Space has an encounterKey');

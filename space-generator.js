@@ -1,6 +1,7 @@
 var GetNeighbors = require('./get-neighbors');
 var createProbable = require('probable').createProbable;
 var spaceTypes = require('./space-types');
+var randomId = require('idmaker').randomId;
 
 // Returns a function that generates spaces (using shared state across calls).
 function SpaceGenerator(createOpts) {
@@ -77,6 +78,7 @@ function generateSpace(opts) {
   }
 
   var space = {
+    id: 'space-' + randomId(4),
     type: typesTable.roll(),
     description: 'Hey, this is a space.',
     encounterKey: 'main-deck',
