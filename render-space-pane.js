@@ -3,6 +3,7 @@
 // var findWhere = require('lodash.findwhere');
 var d3 = require('d3-selection');
 var accessor = require('accessor');
+var recycleElement = require('./recycle-element');
 
 var getId = accessor();
 
@@ -29,14 +30,6 @@ function renderSpacePane(opts) {
   }
 
   return spaceSel;
-}
-
-function recycleElement(rootSel, className, tag) {
-  var sel = rootSel.select('.' + className);
-  if (sel.empty()) {
-    sel = rootSel.append(tag).classed(className, true);
-  }
-  return sel;
 }
 
 module.exports = renderSpacePane;

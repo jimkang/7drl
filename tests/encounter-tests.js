@@ -28,7 +28,6 @@ function runTest(space) {
     });
 
     t.ok(encounter.id, 'Encounter has an id.');
-    t.ok(encounter.introText, 'Encounter has introText.');
     t.ok(['guy', 'event', 'item'].indexOf(encounter.type) !== -1, 'Encounter has a type.');
     t.equal(typeof encounter.go, 'function', 'Encounter has a go function.');
 

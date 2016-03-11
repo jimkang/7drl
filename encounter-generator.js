@@ -59,7 +59,6 @@ function EncounterGenerator(createOpts) {
     var encounter = {
       id: 'encounter-' + randomId(4),
       type: encounterType,
-      introText: 'An encounter is starting!',
       go: go
     };
 

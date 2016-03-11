@@ -32,3 +32,6 @@ graph-workspace:
 
 space-pane-workspace:
 	wzrd workspaces/space-pane-workspace.js:index.js -- -d
+
+encounter-pane-workspace:
+	wzrd workspaces/encounter-pane-workspace.js:index.js -- -d
