@@ -25,3 +25,7 @@ body {
 .invisible {
   opacity: 0;
 }
+
+.encounter-choice {
+  cursor: pointer
+}

@@ -68,7 +68,7 @@ function EncounterGenerator(createOpts) {
       // TODO: Get next thing in tree.
       var turnOpts = {
         itsOver: probable.roll(3) === 0,
-        text: 'Something is happening',
+        text: 'Something is happening ' + randomId(8),
         effects: [
           {
             id: 'something',

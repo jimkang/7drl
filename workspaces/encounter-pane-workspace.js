@@ -33,12 +33,18 @@ function renderEncounterAtIndex(i) {
   var encounter = encounters[i];
   encounter.go(null, null, runRender);
 
+  var encounterSel;
+
   function runRender(error, turn) {
     if (error) {
       console.log(error);
     }
+    if (turn.itsOver) {
+      console.log('It\'s over!');
+      encounterSel.remove();
+    }
     else {
-      renderEncounterPane({
+      encounterSel = renderEncounterPane({
         root: document.body,
         encounter: encounter,
         turn: turn,
