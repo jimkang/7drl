@@ -1,17 +1,11 @@
 var randomId = require('idmaker').randomId;
 
-function generateRandomGraph(opts) {
-  var random;
-
-  if (opts) {
-    random = opts.random;
-  }
-  
+function generateRandomGraph({random, numberOfNodes}) {
   var randomgraph = require('randomgraph')({
     random: random
   });
 
-  var graphData = randomgraph.WattsStrogatz.beta(30, 4, 0.2);
+  var graphData = randomgraph.WattsStrogatz.beta(numberOfNodes, 4, 0.2);
   graphData.nodes.forEach(setNodeId);
 
   return {

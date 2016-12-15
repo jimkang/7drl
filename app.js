@@ -13,7 +13,8 @@ var sb = require('standard-bail')({
 var random = seedrandom('app');
 
 var graphData = generateRandomGraph({
-  random: random
+  random: random,
+  numberOfNodes: 15
 });
 
 var generateSpaceForNode = SpaceGenerator({
