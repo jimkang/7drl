@@ -34,7 +34,7 @@ function Graph(createOpts) {
     force = d3force(random)
         .size([width, height])
         .charge(-800)
-        .linkDistance(40)
+        .linkDistance(150)
         .on("tick", tick);
 
     svg = d3.select("body").append("svg")
