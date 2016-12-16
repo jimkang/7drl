@@ -69,13 +69,15 @@ function Graph(createOpts) {
         .attr('id', getId)
         .attr("class", "node")
         .attr("r", 12)
+        .attr('stroke', getKeyColor)
+        .attr('fill', getElevationColor)
         .on("click", click);
 
-    setTimeout(renderLinks, 4000);
+    // setTimeout(renderLinks, 4000);
   }
 
   function tick() {
-    // linksSel.attr('d', generateWavyPath);
+    linksSel.attr('d', generateWavyPath);
 
     nodesSel.attr("cx", function(d) { return d.x; })
         .attr("cy", function(d) { return d.y; });
@@ -125,6 +127,14 @@ function Graph(createOpts) {
     render: render,
     renderUpdate: renderUpdate
   };
+}
+
+function getKeyColor(d) {
+  return d.space.keyColor;
+}
+
+function getElevationColor(d) {
+  return 'hsl(0, 0%, ' + (100 + d.space.elevation) + '%)';
 }
 
 module.exports = Graph;

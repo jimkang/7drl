@@ -10,7 +10,7 @@ var sb = require('standard-bail')({
   log: console.log
 });
 
-var random = seedrandom('worgjuice');
+var random = seedrandom('worg');
 
 var graphData = generateRandomGraph({
   random: random,

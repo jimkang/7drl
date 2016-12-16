@@ -99,7 +99,9 @@ function SpaceGenerator(createOpts) {
       description: getDescriptionForSpace(spaceType),
       encounterKey: 'main-deck',
       hasExit: makeExit || false,
-      hasEntrance: makeEntrance || false
+      hasEntrance: makeEntrance || false,
+      keyColor: 'hsl(' + probable.roll(360) + ', 50%, 50%)',
+      elevation: probable.roll(100) * -1
     };
 
     return space;

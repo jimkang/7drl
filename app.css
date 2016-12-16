@@ -19,14 +19,11 @@ body {
 }
 
 .link {
-  stroke: #000;
-  stroke-width: 1.5px;
+  fill: hsla(0, 0%, 50%, 0.4);
 }
 
 .node {
   cursor: pointer;
-  fill: #ccc;
-  stroke: #000;
   stroke-width: 1.5px;
 }
 
