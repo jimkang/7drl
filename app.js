@@ -5,35 +5,47 @@ var renderGraphPane = require('./render-graph-pane');
 var renderSpacePane = require('./render-space-pane');
 var renderEncounterPane = require('./render-encounter-pane');
 var seedrandom = require('./lib/seedrandom.min.js');
+var qs = require('qs');
 
 var sb = require('standard-bail')({
   log: console.log
 });
 
-var random = seedrandom('worg');
+var generateSpaceForNode;
+var generateEncounter;
+var graphData;
 
-var graphData = generateRandomGraph({
-  random: random,
-  numberOfNodes: 15
-});
+function init({seed}) {
+  var random = seedrandom(seed);
 
-var generateSpaceForNode = SpaceGenerator({
-  random: random
-});
+  graphData = generateRandomGraph({
+    random: random,
+    numberOfNodes: 15
+  });
 
-var generateEncounter = EncounterGenerator({ 
-  random: random
-});
+  generateSpaceForNode = SpaceGenerator({
+    random: random
+  });
 
-graphData.nodes.map(generateSpace).map(addEncounterToSpace);
+  generateEncounter = EncounterGenerator({ 
+    random: random
+  });
 
-document.addEventListener('node-selected', respondToNodeSelection);
+  graphData.nodes.map(generateSpace).map(addEncounterToSpace);
 
-renderGraphPane({
-  random: random,
-  nodes: graphData.nodes,
-  links: graphData.links
-});
+  document.addEventListener('node-selected', respondToNodeSelection);
+
+  renderGraphPane({
+    random: random,
+    nodes: graphData.nodes,
+    links: graphData.links
+  });
+}
+
+((function go() {
+  route();
+  window.onhashchange = route;
+})());
 
 function generateSpace(node) {
   var space = generateSpaceForNode({
@@ -83,5 +95,18 @@ function respondToNodeSelection(e) {
       };
       space.encounter.go(null, response, sb(renderTurn));
     }
+  }
+}
+
+
+
+function parseQS() {
+  return qs.parse(window.location.hash.slice(1));
+}
+
+function route() {
+  var routeDict = parseQS();
+  if ('seed' in routeDict) {
+    init(routeDict);
   }
 }

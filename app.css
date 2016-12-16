@@ -24,7 +24,7 @@ body {
 
 .node {
   cursor: pointer;
-  stroke-width: 1px;
+  stroke-width: 2px;
 }
 
 .node.fixed {
@@ -32,7 +32,7 @@ body {
 }
 
 .node.player-graph-node {
-  stroke-width: 4px;
+  stroke-width: 8px;
 }
 
 .invisible {
