@@ -2,6 +2,8 @@ var d3force = require('./lib/d3-force').layout.force;
 var d3 = require('d3-selection');
 var Crown = require('csscrown');
 var accessor = require('accessor');
+var drawWavyLine = require('./draw-wavy-line');
+var createProbable = require('probable').createProbable;
 
 var crownPlayerNode = Crown({
   crownClass: 'player-graph-node'
@@ -24,6 +26,8 @@ function Graph(createOpts) {
   if (!random) {
     random = Math.random;
   }
+
+  var probable = createProbable({random: random});
 
   var force;
   var svg;
@@ -55,7 +59,9 @@ function Graph(createOpts) {
         .start();
 
     linksSel = linksSel.data(links)
-      .enter().append("line")
+      .enter()
+        .append('path')
+        // .attr('d', generateWavyPath)
         .attr("class", "link");
 
     nodesSel = nodesSel.data(nodes)
@@ -64,16 +70,19 @@ function Graph(createOpts) {
         .attr("class", "node")
         .attr("r", 12)
         .on("click", click);
+
+    setTimeout(renderLinks, 4000);
   }
 
   function tick() {
-    linksSel.attr("x1", function(d) { return d.source.x; })
-        .attr("y1", function(d) { return d.source.y; })
-        .attr("x2", function(d) { return d.target.x; })
-        .attr("y2", function(d) { return d.target.y; });
+    // linksSel.attr('d', generateWavyPath);
 
     nodesSel.attr("cx", function(d) { return d.x; })
         .attr("cy", function(d) { return d.y; });
+  }
+
+  function renderLinks() {
+    linksSel.attr('d', generateWavyPath);
   }
 
   function click(d) {
@@ -102,6 +111,14 @@ function Graph(createOpts) {
 
   function revealSVG() {
     svg.classed('invisible', false);
+  }
+
+  function generateWavyPath(d) {
+    return drawWavyLine({
+      probable: probable,
+      start: [d.source.x, d.source.y],
+      end: [d.target.x, d.target.y]
+    });
   }
 
   return {

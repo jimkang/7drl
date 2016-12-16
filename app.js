@@ -10,7 +10,7 @@ var sb = require('standard-bail')({
   log: console.log
 });
 
-var random = seedrandom('app');
+var random = seedrandom('worgjuice');
 
 var graphData = generateRandomGraph({
   random: random,
@@ -21,7 +21,7 @@ var generateSpaceForNode = SpaceGenerator({
   random: random
 });
 
-var generateEncounter = EncounterGenerator({
+var generateEncounter = EncounterGenerator({ 
   random: random
 });
 
